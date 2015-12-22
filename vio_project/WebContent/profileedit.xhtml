@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation - Edit User Profile Page</title>
+		<div id="page" class="clear " style="padding-top: 20px;">
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+							<div class="form-group clearfix">
+								<div style="text-align: center">
+									<h1>Dear, #{userBean.selectedUser.username} Edit Your
+										Information</h1>
+								</div>
+							</div>
+							<hr />
+
+							<div class="form-group clearfix">
+								<div class="col-md-4 col-xs-12">
+									<p:outputLabel value="Profile Image" />
+								</div>
+
+								<div class="col-md-8 col-xs-12">
+									<h:form prependId="false" enctype="multipart/form-data">
+										<p:fileUpload value="#{violationBean.uploadFile}"
+											fileUploadListener="#{userBean.uploadProfileImage}"
+											mode="advanced" dragDropSupport="false" multiple="true"
+											update="messages" sizeLimit="1000000" fileLimit="3"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+										<p:growl id="messages" showDetail="true" />
+									</h:form>
+								</div>
+							</div>
+
+							<h:form id="editprofile">
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="E-Mail" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text"
+											readonly="true" required="true" id="email"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.email}"></p:inputText>
+										<p:message for="email" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Username" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text"
+											readonly="true" required="true" id="username"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.username}"></p:inputText>
+										<p:message for="username" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="First Name" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text"
+											required="true" id="firstname"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.firstName}"></p:inputText>
+										<p:message for="firstname" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Last Name" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text"
+											required="true" id="lastName"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.lastName}"></p:inputText>
+										<p:message for="lastName" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="About You" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:editor styleClass="form-control" required="true"
+											style="height:280px" id="description"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.description}"></p:editor>
+										<p:message for="description" />
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Password" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="password"
+											required="true" id="password"
+											requiredMessage="Value Required!"
+											value="#{userBean.loggedUser.password}"></p:inputText>
+										<p:message for="password" />
+									</div>
+								</div>
+								<p:commandButton value="Update Your Information" id="editinfo"
+									type="submit" actionListener="#{userBean.updateUserInfo}"
+									update="@form" styleClass="ui-priority-primary" />
+
+							</h:form>
+
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation - Category List</title>
+
+
+		<div id="page" class="clear " style="padding-top: 20px;">
+
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+
+							<h:form>
+
+								<h3>All Categories</h3>
+								<p:dataTable var="category" value="#{categoryBean.selectedList}"
+									scrollRows="20" scrollable="true" liveScroll="true"
+									scrollHeight="500" style="margin-bottom:0">
+
+									<p:column headerText="Id" footerText="Id">
+										<h:outputText value="#{category.id}" />
+									</p:column>
+
+									<p:column headerText="Parent" footerText="Parent">
+										<h:outputText value="#{category.parentCatName}" />
+									</p:column>
+									<p:column headerText="Name" footerText="Name">
+										<h:outputText value="#{category.name}" />
+									</p:column>
+
+									<p:column headerText="Process" footerText="Process">
+
+										<a title="Edit" class="btn btn-default btn-circle"
+											href="#{applicationBean.getCategoryDetailPageUrl(category)}">Edit
+										</a>
+									</p:column>
+
+								</p:dataTable>
+
+							</h:form>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

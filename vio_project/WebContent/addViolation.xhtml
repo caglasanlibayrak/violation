@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation - Add Page</title>
+
+
+		<div id="page" class="clear " style="padding-top: 20px;">
+
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+
+							<h:form>
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Violation Name" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text" id="name"
+											value="#{violationBean.selectedViolation.name}"></p:inputText>
+										<p:message for="name" />
+									</div>
+
+								</div>
+
+
+								<p:commandButton value="Ajax Submit" id="ajaxxx"
+									actionListener="#{violationBean.buttonAction}"
+									styleClass="ui-priority-primary" />
+
+							</h:form>
+
+							<h:form>
+								<p:growl id="messages" showDetail="true" life="2000" />
+
+								<p:gmap id="gmap" center="41.381542, 2.122893" zoom="15"
+									type="ROADMAP" style="width:100%;height:400px">
+									<p:ajax event="stateChange"
+										listener="#{eventView.onStateChange}" update="messages" />
+									<p:ajax event="pointSelect"
+										listener="#{eventView.onPointSelect}" update="messages" />
+								</p:gmap>
+							</h:form>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

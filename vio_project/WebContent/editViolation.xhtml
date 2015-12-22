@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation Edit Page</title>
+
+		<div id="page" class="clear " style="padding-top: 20px;">
+
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+
+							<div class="form-group clearfix">
+								<div class="col-md-4 col-xs-12">
+									<p:outputLabel value="Violation Image" />
+								</div>
+
+								<div class="col-md-8 col-xs-12">
+									<h:form prependId="false" enctype="multipart/form-data">
+										<p:fileUpload value="#{violationBean.uploadFile}"
+											fileUploadListener="#{violationBean.uploadViolationLogoImage}"
+											mode="advanced" dragDropSupport="false" multiple="true"
+											sizeLimit="1000000" fileLimit="3"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+											update=":updateviolationform messages">
+										</p:fileUpload>
+
+										<p:growl id="messages" showDetail="true" />
+									</h:form>
+								</div>
+							</div>
+
+
+							<h:form id="updateviolationform">
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12"></div>
+									<div class="col-md-8 col-xs-12">
+										<c:choose>
+											<c:when
+												test="#{violationBean.selectedViolation.imageUrl != null}">
+												<div class="form-group clearfix">
+													<img width="90%"
+														src="#{violationBean.selectedViolation.imageUrl}" />
+												</div>
+
+											</c:when>
+											<c:otherwise>
+										Violation Image to Here!
+										</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Violation Category" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:selectOneMenu id="category" style="width:100%"
+											value="#{violationBean.selectedViolation.catParentId}">
+											<f:selectItems
+												value="#{violationBean.categoriessAsSelectItem}" />
+												<p:ajax update="ccategory"  event="change" listener="#{violationBean.loadSubCategories()}"></p:ajax>
+										</p:selectOneMenu>
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Violation Sub Category" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:selectOneMenu id="ccategory" style="width:100%"
+											value="#{violationBean.selectedViolation.catChildId}">
+											<f:selectItems
+												value="#{violationBean.subCategoriessAsSelectItem}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Value" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="number"
+											id="value" value="#{violationBean.selectedViolation.value}"></p:inputText>
+										cm/slope*100
+										<p:message for="value" />
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Violation Name" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text" id="pname"
+											value="#{violationBean.selectedViolation.name}"></p:inputText>
+										<p:message for="pname" />
+									</div>
+								</div>
+
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Severity" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:selectOneMenu id="severity" style="width:100%"
+											value="#{violationBean.selectedViolation.severity}">
+											<f:selectItem itemLabel="1" itemValue="1" />
+											<f:selectItem itemLabel="2" itemValue="2" />
+											<f:selectItem itemLabel="3" itemValue="3" />
+											<f:selectItem itemLabel="4" itemValue="4" />
+											<f:selectItem itemLabel="5" itemValue="5" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Description" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:editor styleClass="form-control" required="true"
+											style="height:280px" id="description"
+											requiredMessage="Value Required!"
+											value="#{violationBean.selectedViolation.description}"></p:editor>
+										<p:message for="description" />
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Status" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:selectOneMenu id="pstatus" style="width:100%"
+											value="#{violationBean.selectedViolation.status}">
+											<f:selectItem itemLabel="Active" itemValue="1" />
+											<f:selectItem itemLabel="Passive" itemValue="-1" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+
+
+								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Set Places On Map" />
+									</div>
+									<div class="col-md-8 col-xs-12">
+										<p:growl id="messagesss" showDetail="true" life="2000" />
+
+										<p:gmap id="gmap"
+											center="41.04686412933831, 28.99021625518799" zoom="15"
+											type="ROADMAP" style="width:100%;height:400px">
+											<p:ajax event="stateChange"
+												listener="#{violationBean.onStateChange}"
+												update="messagesss" />
+											<p:ajax event="pointSelect"
+												listener="#{violationBean.onPointSelect}"
+												update="messagesss" />
+										</p:gmap>
+									</div>
+								</div>
+
+								<p:commandButton value="Add Violation" id="updateviolation"
+									rendered="#{violationBean.selectedViolation.id == null}"
+									type="submit"
+									actionListener="#{violationBean.saveOrUpdateViolation()}"
+									update="@form" styleClass="ui-priority-primary" />
+
+								<p:commandButton value="Update Violation" id="addviolation"
+									rendered="#{violationBean.selectedViolation.id != null}"
+									type="submit" update="@form"
+									actionListener="#{violationBean.saveOrUpdateViolation()}"
+									styleClass="ui-priority-primary" />
+
+							</h:form>
+
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

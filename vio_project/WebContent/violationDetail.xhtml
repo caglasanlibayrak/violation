@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation Detail Page</title>
+		<div id="page" class="clear " style="padding-top: 20px;">
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+							<div class="form-group clearfix">
+								<div style="text-align: center">
+									<h1>#{violationBean.selectedViolation.name}</h1>
+								</div>
+							</div>
+							<hr />
+
+							<div class="form-group clearfix">
+								<div class="col-md-4 col-xs-12">
+
+
+									<c:choose>
+										<c:when
+											test="#{violationBean.selectedViolation.imageUrl != null}">
+											<div class="form-group clearfix">
+												<img width="90%"
+													src="#{violationBean.selectedViolation.imageUrl}"
+													alt="#{violationBean.selectedViolation.name}" />
+											</div>
+
+										</c:when>
+										<c:otherwise>
+										Violation Image to Here!
+										</c:otherwise>
+									</c:choose>
+
+								</div>
+
+								<div class="col-md-8 col-xs-12">
+									#{violationBean.selectedViolation.name}
+
+									<hr />
+
+									<div class="form-group clearfix">
+										<div class="col-md-4 col-xs-12">
+											<p:outputLabel value="Violation Category" />
+										</div>
+										<div class="col-md-8 col-xs-12">
+											<p:selectOneMenu id="category" style="width:100%"
+												disabled="true"
+												value="#{violationBean.selectedViolation.catParentId}">
+												<f:selectItems
+													value="#{violationBean.categoriessAsSelectItem}" />
+											</p:selectOneMenu>
+										</div>
+									</div>
+
+
+									<div class="form-group clearfix">
+										<div class="col-md-4 col-xs-12">
+											<p:outputLabel value="Violation Sub Category" />
+										</div>
+										<div class="col-md-8 col-xs-12">
+											<p:selectOneMenu id="ccategory" style="width:100%" disabled="true"
+												value="#{violationBean.selectedViolation.catChildId}">
+												<f:selectItems
+													value="#{violationBean.subCategoriessAsSelectItem}" />
+											</p:selectOneMenu>
+										</div>
+									</div>
+
+									<div class="form-group clearfix">
+										<div class="col-md-4 col-xs-12">
+											<p:outputLabel value="Value" />
+										</div>
+
+										<div class="col-md-8 col-xs-12">
+											<p:inputText styleClass="form-control" type="number" disabled="true"
+												id="value" value="#{violationBean.selectedViolation.value}"></p:inputText>
+											cm/slope*100
+											<p:message for="value" />
+										</div>
+									</div>
+
+									<div class="form-group clearfix">
+										<div class="col-md-4 col-xs-12">
+											<p:outputLabel value="Severity" />
+										</div>
+										<div class="col-md-8 col-xs-12">
+											#{violationBean.selectedViolation.severity}</div>
+									</div>
+
+									<hr />
+									<p:outputLabel escape="false"
+										value="#{violationBean.selectedViolation.description}"></p:outputLabel>
+
+
+									<hr />
+									Geo Location; Lat: #{violationBean.selectedViolation.latitude}
+									- Long: #{violationBean.selectedViolation.longitude}
+									<hr />
+
+									<p:gmap id="gmap"
+										center="#{violationBean.selectedViolation.latitude},#{violationBean.selectedViolation.longitude}"
+										zoom="17" type="HYBRID" style="width:100%;height:400px" />
+
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

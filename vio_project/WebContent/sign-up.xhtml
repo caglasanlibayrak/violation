@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fd="http://fd.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="template/template.xhtml">
+
+	<ui:define name="content">
+		<title>Violation - Sign Up Page</title>
+		<div id="page" class="clear " style="padding-top: 20px;">
+			<div id="cerceve">
+
+				<div class="container ">
+
+					<div class="row">
+
+
+						<div
+							class="box-shadow-center col-md-10 col-xs-12 col-md-offset-1 padding20">
+
+
+
+							<h:form id="signupform">
+								<c:choose>
+									<c:when test="#{userBean.loggedIn}">
+										<div class="form-group clearfix">
+											<h1>You Must Logout to Sign-Up With a New Account!</h1>
+										</div>
+									</c:when>
+									<c:otherwise>
+
+										<div class="form-group clearfix">
+											<h1>Create An Account on Violation!</h1>
+										</div>
+										<div class="form-group clearfix">
+											<div class="col-md-4 col-xs-12">
+												<p:outputLabel value="First Name" />
+											</div>
+
+											<div class="col-md-8 col-xs-12">
+												<p:inputText styleClass="form-control" type="text"
+													required="true" id="fistname"
+													requiredMessage="Value Required!"
+													value="#{userBean.loggedUser.firstName}"></p:inputText>
+												<p:message for="fistname" />
+											</div>
+										</div>
+
+
+										<div class="form-group clearfix">
+											<div class="col-md-4 col-xs-12">
+												<p:outputLabel value="Last Name" />
+											</div>
+
+											<div class="col-md-8 col-xs-12">
+												<p:inputText styleClass="form-control" type="text"
+													required="true" id="lastName"
+													requiredMessage="Value Required!"
+													value="#{userBean.loggedUser.lastName}"></p:inputText>
+												<p:message for="lastName" />
+											</div>
+										</div>
+
+										<div class="form-group clearfix">
+											<div class="col-md-4 col-xs-12">
+												<p:outputLabel value="E-Mail" />
+											</div>
+
+											<div class="col-md-8 col-xs-12">
+												<p:inputText styleClass="form-control" type="text"
+													required="true" id="email"
+													requiredMessage="Value Required!"
+													value="#{userBean.loggedUser.email}"></p:inputText>
+												<p:message for="email" />
+											</div>
+										</div>
+
+										<div class="form-group clearfix">
+											<div class="col-md-4 col-xs-12">
+												<p:outputLabel value="Username" />
+											</div>
+
+											<div class="col-md-8 col-xs-12">
+												<p:inputText styleClass="form-control" type="text"
+													required="true" id="username"
+													requiredMessage="Value Required!"
+													value="#{userBean.loggedUser.username}"></p:inputText>
+												<p:message for="username" />
+											</div>
+										</div>
+
+										<div class="form-group clearfix">
+											<div class="col-md-4 col-xs-12">
+												<p:outputLabel value="Password" />
+											</div>
+
+											<div class="col-md-8 col-xs-12">
+												<p:inputText styleClass="form-control" type="password"
+													required="true" id="password"
+													requiredMessage="Value Required!"
+													value="#{userBean.loggedUser.password}"></p:inputText>
+												<p:message for="password" />
+											</div>
+										</div>
+
+										<p:commandButton value="Sign Up" id="signup" type="submit"
+											actionListener="#{userBean.signUp}" update="@form"
+											styleClass="ui-priority-primary" />
+
+										<a title="Already Member" class="btn btn-default btn-circle"
+											href="#{applicationBean.getLoginPageUrl()}">Already
+											Member! </a>
+
+									</c:otherwise>
+								</c:choose>
+							</h:form>
+
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
