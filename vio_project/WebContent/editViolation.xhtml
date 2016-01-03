@@ -47,6 +47,18 @@
 							<h:form id="updateviolationform">
 
 								<div class="form-group clearfix">
+									<div class="col-md-4 col-xs-12">
+										<p:outputLabel value="Violation Subject" />
+									</div>
+
+									<div class="col-md-8 col-xs-12">
+										<p:inputText styleClass="form-control" type="text" id="pname"
+											value="#{violationBean.selectedViolation.name}"></p:inputText>
+										<p:message for="pname" />
+									</div>
+								</div>
+
+								<div class="form-group clearfix">
 									<div class="col-md-4 col-xs-12"></div>
 									<div class="col-md-8 col-xs-12">
 										<c:choose>
@@ -74,7 +86,8 @@
 											value="#{violationBean.selectedViolation.catParentId}">
 											<f:selectItems
 												value="#{violationBean.categoriessAsSelectItem}" />
-												<p:ajax update="ccategory"  event="change" listener="#{violationBean.loadSubCategories()}"></p:ajax>
+											<p:ajax update="ccategory" event="change"
+												listener="#{violationBean.loadSubCategories()}"></p:ajax>
 										</p:selectOneMenu>
 									</div>
 								</div>
@@ -105,17 +118,7 @@
 									</div>
 								</div>
 
-								<div class="form-group clearfix">
-									<div class="col-md-4 col-xs-12">
-										<p:outputLabel value="Violation Name" />
-									</div>
 
-									<div class="col-md-8 col-xs-12">
-										<p:inputText styleClass="form-control" type="text" id="pname"
-											value="#{violationBean.selectedViolation.name}"></p:inputText>
-										<p:message for="pname" />
-									</div>
-								</div>
 
 
 								<div class="form-group clearfix">
